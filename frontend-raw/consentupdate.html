@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Secure Labs - Login</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-Bq3gqWS+SjKo/G0LkCyA/2QTwvK8WZxG7HrSTtTNyfLmyO82wvsm4O4l4lhGZQRm0Nxg3fm5aSj5K5z+8WdL0w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+      body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f2f2f2;
+      }
+      .black {
+        color: #000;
+      }
+
+      .blue {
+        color: #0073aa;
+      }
+      .title {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+      .title h1 {
+        font-size: 60px;
+      }
+      .update-consent-box {
+        width: 400px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        margin: 20px auto;
+        padding: 40px;
+      }
+      .update-consent-box h1 {
+        text-align: center;
+        font-weight: 500;
+        margin-top: 0;
+      }
+      .btn {
+        width: 100%;
+        background-color: #0073aa;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 18px;
+        cursor: pointer;
+        margin: 12px 0;
+        transition: all 0.3s ease-in-out;
+      }
+      .btn:hover {
+        background-color: #005f8c;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+      .textbox {
+        position: relative;
+        margin: 30px 0;
+        }
+
+        .textbox input {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        border-bottom: 2px solid #999;
+        outline: none;
+        background: transparent;
+        }
+
+        .textbox label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 10px;
+        font-size: 16px;
+        color: #999;
+        pointer-events: none;
+        transition: 0.5s;
+        }
+
+        .textbox input:focus ~ label,
+        .textbox input:valid ~ label {
+        top: -20px;
+        font-size: 12px;
+        color: #0073aa;
+        }
+
+        .textbox input:focus ~ .bar:before,
+        .textbox input:focus ~ .bar:after {
+        width: 50%;
+        }
+
+        .textbox input:focus ~ .highlight {
+        animation: input-highlighter 0.3s ease;
+        }
+
+        .textbox input:valid ~ .highlight {
+        animation: input-highlighter 0.3s ease;
+        }
+
+        @keyframes input-highlighter {
+            from {
+                background: #0073aa;
+            }
+            to {
+                width: 0;
+                background: transparent;
+            }
+        }
+
+         @media (max-width: 500px) {
+            .update-consent-box {
+                width: 80%;
+            }
+        }
+        .list-container {
+        margin: 50px auto;
+        width: 100%;
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        visibility: hidden;
+        }
+
+        .list-container h2 {
+        font-size: 24px;
+        font-weight: 500;
+        padding: 20px;
+        margin: 0;
+        background-color: #0073aa;
+        color: #fff;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        }
+
+        .list {
+        padding: 20px;
+        background-color: #fff;
+        }
+
+        .list li {
+        list-style: none;
+        font-size: 18px;
+        margin-bottom: 10px;
+        }
+        .dropdown {
+        display: flex;
+        align-items: center;
+        margin: 50px auto;
+        width: 100%;
+        }
+
+        .dropdown select {
+        width: 100%;
+        height: 50px;
+        padding: 10px;
+        border: none;
+        border-bottom: 2px solid #999;
+        font-size: 16px;
+        margin-right: 20px;
+        }
+
+        .dropdown button {
+        background-color: #0073aa;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        width: 30%;
+        }
+
+        .dropdown button:hover {
+        background-color: #005f8c;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+    </style>
+  </head>
+  <body>
+    <div class="title">
+      <h1><span class="black">Secure</span> <span class="blue">Labs</span></h1>
+    </div>
+    <div class="update-consent-box">
+      <h1>Update Access Consent</h1>
+      <div class="dropdown">
+        <select id="providers">
+          <option value="default" selected disabled>Select who to provide access to</option>
+          <option value="provider1">Provider 1</option>
+          <option value="provider2">Provider 2</option>
+          <option value="provider3">Provider 3</option>
+          <option value="provider4">Provider 4</option>
+          <option value="provider5">Provider 5</option>
+        </select>
+      </div>
+      <button id="add-btn" class="btn">Add Access</button>
+      <button id="remove-btn" class="btn">Remove Access</button>
+      <div id="list-container" class="list-container">
+        <ul id="provider-list" class="list"></ul>
+      </div>
+      <button id="submit-btn" class="btn">Update Consent</button>
+    </div>
+  <script>
+    const select = document.querySelector("#providers");
+    const addButton = document.querySelector("#add-btn");
+    const removeButton = document.querySelector("#remove-btn");
+    const list = document.querySelector("#provider-list");
+    const listContainer = document.querySelector("#list-container");
+    const submitButton = document.querySelector("#submit-btn");
+
+    let providers = [];
+
+    addButton.addEventListener("click", function() {
+        const selectedProvider = select.options[select.selectedIndex].text;
+
+        if (!providers.includes(selectedProvider) && select.options[select.selectedIndex] != select.options[0]) {
+            providers.push(selectedProvider);
+
+            const listItem = document.createElement("li");
+            listItem.setAttribute("id", selectedProvider)
+            listItem.innerText = selectedProvider;
+            list.appendChild(listItem);
+            listContainer.style.visibility ='visible';
+        }
+    });
+
+    removeButton.addEventListener("click", function() {
+        const selectedProvider = select.options[select.selectedIndex].text;
+        if (providers.includes(selectedProvider) && select.options[select.selectedIndex] != select.options[0]) {
+            providers.splice(providers.indexOf(selectedProvider), 1)
+
+            document.getElementById(selectedProvider).remove();
+        }
+
+        if (providers.length <= 0) {
+            listContainer.style.visibility ='hidden';
+        }
+    });
+
+    submitButton.addEventListener("click", function() {
+    const url = "/patient/consentupdate";
+    const data = { providers: providers };
+    
+    fetch(url, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+        "Content-Type": "application/json"
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+        throw new Error("Network response was not ok");
+        }
+        return response.json();
+    })
+    .then(json => console.log(json))
+    .catch(error => console.error("Error:", error));
+    });
+  </script>
+  </body>
+</html>
