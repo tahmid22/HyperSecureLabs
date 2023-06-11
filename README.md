@@ -129,8 +129,8 @@ The final experiment also evaluated the read throughput in the same way as the r
 Finally, to conclude this section, the following table shows the contributions of each of the team's components to the completion of this work. 
 | Researcher | Contributions |
 |---|---|
+| Tahmid Mostafa | Hyperledger Fabric setup, File encoding/decoding and encryption/decryption, general backend implementation, evaluation implementation |
 | Aditya Junnarkar | Hyperledger Fabric setup, chaincode implementation, general backend implementation, evaluation implementation |
-| Tahmid Mostafa | File encoding/decoding and encryption/decryption, general backend implementation, evaluation implementation |
 | Enrique Torres Sanchez | Front-end application development, backend file uploading, general backend implementation, evaluation implementation |
 
 It is left for future work, due to the large scope of the project, the evaluation of a real-world deployment of our application and ledger in a cloud service, across different geographically distributed nodes, to measure the effect of added latency on our performance.
